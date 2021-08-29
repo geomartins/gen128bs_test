@@ -40,12 +40,13 @@ const actions = {
       new FlexValidators(data).check({
         firstname: "required|notNull",
         lastname: "required|notNull",
+        company: "required|notNull",
         email: "required|email|notNull",
         reason: "required|notNull"
       });
 
       await new Connector().api_calls(
-        "https://www.agropark.com.ng/api/v1/section/contact",
+        "https://www.agropark.com.ng/api/v1/contact",
         data
       );
 
