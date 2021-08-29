@@ -22,7 +22,7 @@
               filled
               bg-color="white"
               dense
-              v-model="text"
+              v-model="firstname"
               label="First Name"
             />
           </div>
@@ -32,7 +32,7 @@
               filled
               bg-color="white"
               dense
-              v-model="text"
+              v-model="lastname"
               label="Last Name"
             />
           </div>
@@ -47,8 +47,8 @@
               filled
               bg-color="white"
               dense
-              v-model="text"
-              label="First Name"
+              v-model="email"
+              label="Email Address"
             />
           </div>
         </div>
@@ -62,8 +62,8 @@
               filled
               bg-color="white"
               dense
-              v-model="text"
-              label="First Name"
+              v-model="company"
+              placeholder="ex: myname@example.com"
             />
           </div>
         </div>
@@ -77,8 +77,9 @@
               filled
               bg-color="white"
               dense
-              v-model="text"
-              label="First Name"
+              type="textarea"
+              v-model="reason"
+              placeholder="Type here"
             />
           </div>
         </div>
@@ -90,6 +91,7 @@
               label="Register"
               unelevated
               style="border-radius: 1rem;"
+              @click.prevent="submit()"
             />
           </div>
         </div>
@@ -99,12 +101,66 @@
 </template>
 
 <script>
+import { mapState, mapMutations, mapActions } from "vuex";
 export default {
   name: "Footer",
   data() {
     return {
       text: ""
     };
+  },
+  computed: {
+    ...mapState("contact", ["formData", "is_loading"]),
+    firstname: {
+      get() {
+        return this.formData.firstname;
+      },
+      set(value) {
+        this.updateFormData({ key: "firstname", value: value });
+      }
+    },
+    lastname: {
+      get() {
+        return this.formData.lastname;
+      },
+      set(value) {
+        this.updateFormData({ key: "lastname", value: value });
+      }
+    },
+
+    email: {
+      get() {
+        return this.formData.email;
+      },
+      set(value) {
+        this.updateFormData({ key: "email", value: value });
+      }
+    },
+
+    company: {
+      get() {
+        return this.formData.company;
+      },
+      set(value) {
+        this.updateFormData({ key: "company", value: value });
+      }
+    },
+
+    reason: {
+      get() {
+        return this.formData.reason;
+      },
+      set(value) {
+        this.updateFormData({ key: "reason", value: value });
+      }
+    }
+  },
+  methods: {
+    ...mapMutations("contact", ["updateFormData"]),
+    ...mapActions("contact",["create"]),
+    async submit() {
+      this.create(this);
+    }
   }
 };
 </script>

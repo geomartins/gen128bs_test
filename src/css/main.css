@@ -259,7 +259,7 @@ ul > li > a {
   flex-direction: column;
   width: 100%;
   height: auto;
-  margin-bottom: 2rem;
+  margin-bottom: 1.2rem;
 }
 
 .form_vertical > .form_vertical__label {
