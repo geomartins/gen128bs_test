@@ -17,6 +17,7 @@ import Banner from "../components/Banner.vue";
 import Services from "../components/Services.vue";
 import Footer from "../components/Footer.vue";
 import Contact from "../components/Contact.vue";
+
 export default {
   name: "PageIndex",
   components: {
